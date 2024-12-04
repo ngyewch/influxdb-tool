@@ -1,0 +1,28 @@
+version: 3
+
+tasks:
+  clean:
+    desc: Clean
+    cmds:
+      - rm -rf dist
+
+  preBuild:
+    cmds:
+      - go mod download
+      - go mod tidy
+
+  build:
+    desc: Build
+    cmds:
+      - goreleaser build --snapshot --clean
+
+  build-single:
+    desc: Build (single)
+    cmds:
+      - goreleaser build --snapshot --clean --single-target --output dist/influxdb-tool
+
+  dependencyUpdates:
+    desc: Show dependency updates
+    deps: [ preBuild ]
+    cmds:
+      - go list -u -m -json all | go-mod-outdated -update -direct
