@@ -26,3 +26,23 @@ tasks:
     deps: [ preBuild ]
     cmds:
       - go list -u -m -json all | go-mod-outdated -update -direct
+
+  start-influxdb:
+    desc: Start local InfluxDB server
+    cmds:
+      - docker build --tag influxdb2-local:latest docker
+      - docker run -it --rm -p 8086:8086
+          -e DOCKER_INFLUXDB_INIT_MODE=setup 
+          -e DOCKER_INFLUXDB_INIT_USERNAME=admin
+          -e DOCKER_INFLUXDB_INIT_PASSWORD=password
+          -e DOCKER_INFLUXDB_INIT_ORG=my_org
+          -e DOCKER_INFLUXDB_INIT_BUCKET=my_bucket
+          -e DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=my-super-secret-auth-token
+          influxdb2-local:latest
+    env:
+      BUILDKIT_PROGRESS: auto
+
+  test:
+    deps: [ build-single ]
+    cmds:
+      - SSH_PROXY= INFLUXDB_AUTH_TOKEN=my-super-secret-auth-token dist/influxdb-tool report --config-file config.yml --output-file report.html

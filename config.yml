@@ -1,16 +1,3 @@
-# influxdb-tool
-
-InfluxDB tool.
-
-## Report
-
-```
-influxdb-tool report --config-file config.yml --output-file report.html
-```
-
-### Sample config file
-
-```
 ---
 org: my_org
 bucket: air-sensor
@@ -41,4 +28,3 @@ queries:
       field: humidity
   - tags:
       field: temperature
-```
