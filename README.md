@@ -42,3 +42,7 @@ queries:
   - tags:
       field: temperature
 ```
+
+### Sample output
+
+![screenshot.png](./screenshot.png)
