@@ -2,8 +2,6 @@ module github.com/ngyewch/influxdb-tool
 
 go 1.23.0
 
-toolchain go1.23.4
-
 require (
 	github.com/go-viper/mapstructure/v2 v2.2.1
 	github.com/influxdata/influxdb-client-go/v2 v2.14.0
@@ -11,10 +9,10 @@ require (
 	github.com/knadh/koanf/providers/file v1.1.2
 	github.com/knadh/koanf/v2 v2.1.2
 	github.com/ngyewch/go-chartjs v0.0.0-20241118062334-f372da3f566d
-	github.com/ngyewch/go-ssh-helper v0.2.4
-	github.com/urfave/cli/v2 v2.27.5
+	github.com/ngyewch/go-ssh-helper v0.3.0
+	github.com/urfave/cli/v2 v2.27.6
 	go.octolab.org v0.12.2
-	golang.org/x/crypto v0.29.0
+	golang.org/x/crypto v0.37.0
 )
 
 require (
@@ -33,6 +31,6 @@ require (
 	github.com/trzsz/ssh_config v1.3.6 // indirect
 	github.com/xrash/smetrics v0.0.0-20240521201337-686a1a2994c1 // indirect
 	golang.org/x/net v0.23.0 // indirect
-	golang.org/x/sys v0.27.0 // indirect
+	golang.org/x/sys v0.32.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
