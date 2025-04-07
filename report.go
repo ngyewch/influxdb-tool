@@ -55,6 +55,8 @@ func doReport(cCtx *cli.Context) error {
 	sshProxy := sshProxyFlag.Get(cCtx)
 	configFile := configFileFlag.Get(cCtx)
 	outputFile := outputFileFlag.Get(cCtx)
+	responsive := responsiveFlag.Get(cCtx)
+	animationDuration := animationDurationFlag.Get(cCtx)
 
 	var config ReportConfig
 	err := loadConfig(configFile, &config)
@@ -84,8 +86,10 @@ func doReport(cCtx *cli.Context) error {
 	defer client.Close()
 
 	qc := &QueryClient{
-		Config: &config,
-		Client: client,
+		Config:            &config,
+		Client:            client,
+		Responsive:        responsive,
+		AnimationDuration: animationDuration,
 	}
 
 	var reportData ReportData
@@ -120,8 +124,10 @@ func doReport(cCtx *cli.Context) error {
 }
 
 type QueryClient struct {
-	Client influxdb2.Client
-	Config *ReportConfig
+	Client            influxdb2.Client
+	Config            *ReportConfig
+	Responsive        bool
+	AnimationDuration time.Duration
 }
 
 func (qc *QueryClient) GenerateChart(ctx context.Context, query QueryConfig) (*ReportRow, error) {
@@ -318,6 +324,10 @@ func (qc *QueryClient) doGenerateChart(ctx context.Context, query QueryConfig, a
 		},
 		Options: &chartjs.LineControllerChartOptions{
 			CoreChartOptions: &chartjs.CoreChartOptions{
+				Animation: &chartjs.AnimationSpec{
+					Duration: pointer.ToFloat64(float64(qc.AnimationDuration.Milliseconds())),
+				},
+				Responsive:          pointer.ToBool(qc.Responsive),
 				MaintainAspectRatio: pointer.ToBool(false),
 			},
 			Scales: map[string]chartjs.ICartesianScaleType{

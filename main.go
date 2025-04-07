@@ -4,6 +4,7 @@ import (
 	"github.com/urfave/cli/v2"
 	"log"
 	"os"
+	"time"
 )
 
 var (
@@ -36,6 +37,16 @@ var (
 		Usage:    "output file",
 		Required: true,
 	}
+	responsiveFlag = &cli.BoolFlag{
+		Name:  "responsive",
+		Usage: "responsive",
+		Value: true,
+	}
+	animationDurationFlag = &cli.DurationFlag{
+		Name:  "animation-duration",
+		Usage: "animation duration",
+		Value: 1 * time.Second,
+	}
 
 	app = &cli.App{
 		Name:  "influxdb-tool",
@@ -50,6 +61,8 @@ var (
 					influxdbAuthTokenFlag,
 					configFileFlag,
 					outputFileFlag,
+					responsiveFlag,
+					animationDurationFlag,
 				},
 				Action: doReport,
 			},
