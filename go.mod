@@ -8,7 +8,7 @@ require (
 	github.com/knadh/koanf/parsers/yaml v0.1.0
 	github.com/knadh/koanf/providers/file v1.1.2
 	github.com/knadh/koanf/v2 v2.1.2
-	github.com/ngyewch/go-chartjs v0.0.0-20241118062334-f372da3f566d
+	github.com/ngyewch/go-chartjs v0.1.0
 	github.com/ngyewch/go-ssh-helper v0.3.0
 	github.com/urfave/cli/v2 v2.27.6
 	go.octolab.org v0.12.2
