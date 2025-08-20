@@ -3,6 +3,13 @@ package main
 import (
 	"context"
 	"fmt"
+	"html/template"
+	"net/http"
+	"os"
+	"slices"
+	"strings"
+	"time"
+
 	"github.com/influxdata/influxdb-client-go/v2"
 	"github.com/influxdata/influxdb-client-go/v2/api"
 	"github.com/ngyewch/go-chartjs"
@@ -12,12 +19,6 @@ import (
 	"github.com/urfave/cli/v2"
 	"go.octolab.org/pointer"
 	"golang.org/x/crypto/ssh"
-	"html/template"
-	"net/http"
-	"os"
-	"slices"
-	"strings"
-	"time"
 )
 
 type ReportConfig struct {

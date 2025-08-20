@@ -2,11 +2,12 @@ package main
 
 import (
 	"errors"
+	"os"
+
 	"github.com/go-viper/mapstructure/v2"
 	"github.com/knadh/koanf/parsers/yaml"
 	"github.com/knadh/koanf/providers/file"
 	"github.com/knadh/koanf/v2"
-	"os"
 )
 
 func loadConfig(configFile string, config any) error {
