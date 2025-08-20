@@ -1,34 +1,35 @@
 package main
 
 import (
+	"context"
 	"log"
 	"os"
 	"time"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 )
 
 var (
 	sshProxyFlag = &cli.StringFlag{
 		Name:    "ssh-proxy",
 		Usage:   "SSH proxy",
-		EnvVars: []string{"SSH_PROXY"},
+		Sources: cli.EnvVars("SSH_PROXY"),
 	}
 	influxdbServerUrlFlag = &cli.StringFlag{
 		Category: "InfluxDB",
 		Name:     "influxdb-server-url",
 		Usage:    "InfluxDB server URL",
-		EnvVars:  []string{"INFLUXDB_SERVER_URL"},
+		Sources:  cli.EnvVars("INFLUXDB_SERVER_URL"),
 		Value:    "http://localhost:8086",
 	}
 	influxdbAuthTokenFlag = &cli.StringFlag{
 		Category: "InfluxDB",
 		Name:     "influxdb-auth-token",
 		Usage:    "InfluxDB auth token",
-		EnvVars:  []string{"INFLUXDB_AUTH_TOKEN"},
+		Sources:  cli.EnvVars("INFLUXDB_AUTH_TOKEN"),
 		Required: true,
 	}
-	configFileFlag = &cli.PathFlag{
+	configFileFlag = &cli.StringFlag{
 		Name:     "config-file",
 		Usage:    "config file",
 		Required: true,
@@ -49,7 +50,7 @@ var (
 		Value: 1 * time.Second,
 	}
 
-	app = &cli.App{
+	app = &cli.Command{
 		Name:  "influxdb-tool",
 		Usage: "influxdb-tool",
 		Commands: []*cli.Command{
@@ -72,7 +73,7 @@ var (
 )
 
 func main() {
-	err := app.Run(os.Args)
+	err := app.Run(context.Background(), os.Args)
 	if err != nil {
 		log.Fatal(err)
 	}

@@ -16,7 +16,7 @@ import (
 	sshhelper "github.com/ngyewch/go-ssh-helper"
 	"github.com/ngyewch/influxdb-tool/flux"
 	"github.com/ngyewch/influxdb-tool/resources"
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 	"go.octolab.org/pointer"
 	"golang.org/x/crypto/ssh"
 )
@@ -50,14 +50,14 @@ type ReportRow struct {
 	CountChart *chartjs.LineChartConfiguration
 }
 
-func doReport(cCtx *cli.Context) error {
-	serverUrl := influxdbServerUrlFlag.Get(cCtx)
-	authToken := influxdbAuthTokenFlag.Get(cCtx)
-	sshProxy := sshProxyFlag.Get(cCtx)
-	configFile := configFileFlag.Get(cCtx)
-	outputFile := outputFileFlag.Get(cCtx)
-	responsive := responsiveFlag.Get(cCtx)
-	animationDuration := animationDurationFlag.Get(cCtx)
+func doReport(ctx context.Context, cmd *cli.Command) error {
+	serverUrl := cmd.String(influxdbServerUrlFlag.Name)
+	authToken := cmd.String(influxdbAuthTokenFlag.Name)
+	sshProxy := cmd.String(sshProxyFlag.Name)
+	configFile := cmd.String(configFileFlag.Name)
+	outputFile := cmd.String(outputFileFlag.Name)
+	responsive := cmd.Bool(responsiveFlag.Name)
+	animationDuration := cmd.Duration(animationDurationFlag.Name)
 
 	var config ReportConfig
 	err := loadConfig(configFile, &config)
@@ -96,7 +96,7 @@ func doReport(cCtx *cli.Context) error {
 	var reportData ReportData
 
 	for _, query := range config.Queries {
-		reportRow, err := qc.GenerateChart(cCtx.Context, query)
+		reportRow, err := qc.GenerateChart(ctx, query)
 		if err != nil {
 			return err
 		}
