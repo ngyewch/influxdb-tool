@@ -6,13 +6,13 @@ require (
 	github.com/go-viper/mapstructure/v2 v2.4.0
 	github.com/influxdata/influxdb-client-go/v2 v2.14.0
 	github.com/knadh/koanf/parsers/yaml v1.1.0
-	github.com/knadh/koanf/providers/file v1.2.0
+	github.com/knadh/koanf/providers/file v1.2.1
 	github.com/knadh/koanf/v2 v2.3.0
 	github.com/ngyewch/go-chartjs v0.1.0
 	github.com/ngyewch/go-ssh-helper v0.3.0
-	github.com/urfave/cli/v3 v3.4.1
+	github.com/urfave/cli/v3 v3.6.1
 	go.octolab.org v0.12.2
-	golang.org/x/crypto v0.43.0
+	golang.org/x/crypto v0.46.0
 )
 
 require (
@@ -28,6 +28,6 @@ require (
 	github.com/oapi-codegen/runtime v1.0.0 // indirect
 	github.com/trzsz/ssh_config v1.3.6 // indirect
 	go.yaml.in/yaml/v3 v3.0.3 // indirect
-	golang.org/x/net v0.45.0 // indirect
-	golang.org/x/sys v0.37.0 // indirect
+	golang.org/x/net v0.47.0 // indirect
+	golang.org/x/sys v0.39.0 // indirect
 )
