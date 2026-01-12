@@ -1,8 +1,8 @@
 [tools]
-go = '1.25.3'
-goreleaser = '2.12.5'
-task = '3.45.4'
-'ubi:psampaz/go-mod-outdated' = '0.9.0'
+go = '1.25.5'
+goreleaser = '2.13.3'
+task = '3.46.4'
+'github:psampaz/go-mod-outdated' = '0.9.0'
 
 [env]
 _.file = '~/.config/influxdb-tool/.env'
