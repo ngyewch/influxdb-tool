@@ -8,7 +8,6 @@ tasks:
 
   preBuild:
     cmds:
-      - go mod download
       - go mod tidy
 
   build:
@@ -23,6 +22,7 @@ tasks:
 
   dependencyUpdates:
     desc: Show dependency updates
+    aliases: [ outdated ]
     deps: [ preBuild ]
     cmds:
       - go list -u -m -json all | go-mod-outdated -update -direct
